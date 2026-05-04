@@ -1,32 +1,28 @@
 class Solution {
-    public List<List<Integer>> permute(int[] nums) 
-    {
+    public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
-        backTrack(res, new ArrayList<>(), new HashSet<>(), nums);
+        permuteHelper(nums, 0, res);
         return res;
     }
 
-    public void backTrack(List<List<Integer>> res, List<Integer> tempList, Set<Integer> tempSet, int[] nums)
-    {
-        if(tempSet.size() == nums.length)
-        {
-            res.add(new ArrayList<>(new ArrayList<>(tempList)));
+    private void permuteHelper(int[] nums, int i, List<List<Integer>> res) {
+        if (i == nums.length) {
+            List<Integer> permutation = new ArrayList<>();
+            for (int num : nums) permutation.add(num);
+            res.add(permutation);
             return;
         }
-        else
-        {
-            for(int i = 0; i < nums.length; i++)
-            {
-                if(tempSet.contains(nums[i]))   continue;
 
-                tempSet.add(nums[i]);
-                tempList.add(nums[i]);
-
-                backTrack(res, tempList, tempSet, nums);
-
-                tempSet.remove(tempList.get( tempList.size() - 1) );
-                tempList.remove(tempList.size() - 1);
-            }
+        for (int j = i; j < nums.length; j++) {
+            swap(nums, i, j);
+            permuteHelper(nums, i + 1, res);
+            swap(nums, i, j); // backtrack
         }
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
     }
 }
