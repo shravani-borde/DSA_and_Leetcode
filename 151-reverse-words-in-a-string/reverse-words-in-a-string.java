@@ -6,11 +6,13 @@ class Solution {
         String[] arr = s.trim().split("\\s+");
         int n = arr.length - 1;
         StringBuilder res = new StringBuilder();
+        res.append(arr[n]);
+            n--;
         while(n >= 0){
-            res.append(arr[n] + " ");
+            res.append(" " + arr[n]);
             n--;
         }
 
-        return res.toString().trim();
+        return res.toString();
     }
 }
