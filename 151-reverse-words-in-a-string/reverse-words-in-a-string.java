@@ -3,7 +3,7 @@ class Solution {
         if(s == null || s.length() == 0)
             return s;
         
-        String[] arr = s.trim().split("\\s+");
+        String[] arr = s.split("\\s+");
         int n = arr.length - 1;
         StringBuilder res = new StringBuilder();
         res.append(arr[n]);
@@ -13,6 +13,6 @@ class Solution {
             n--;
         }
 
-        return res.toString();
+        return res.toString().trim();
     }
 }
