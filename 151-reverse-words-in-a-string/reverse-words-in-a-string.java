@@ -5,12 +5,12 @@ class Solution {
         
         String[] arr = s.trim().split("\\s+");
         int n = arr.length - 1;
-        String res = new String();
+        StringBuilder res = new StringBuilder();
         while(n >= 0){
-            res = res + arr[n] + " ";
+            res.append(arr[n] + " ");
             n--;
         }
 
-        return res.trim();
+        return res.toString().trim();
     }
 }
