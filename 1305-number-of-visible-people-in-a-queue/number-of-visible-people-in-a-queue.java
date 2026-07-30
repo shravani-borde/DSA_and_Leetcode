@@ -13,7 +13,7 @@ class Solution {
                 st.pop();
                 count++;
             }
-            if(st.size() != 0 && st.peek() > heights[i])  count++;
+            if(st.size() != 0)  count++;
             st.push(heights[i]);
             ans[i] = count;
         }
