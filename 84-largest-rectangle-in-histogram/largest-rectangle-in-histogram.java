@@ -6,7 +6,6 @@ class Solution {
             return heights[0];
         
         int[] pse = new int[n];
-        int[] nse = new int[n];
         Stack<Integer> st = new Stack<>();
 
         //first, prev smallest element
@@ -18,22 +17,18 @@ class Solution {
         }
 
         st.clear();
+        int max = 0;
+
 
         //then, next smaller element
         for(int i = n-1; i >= 0; i--){
             while(st.size() != 0 && heights[st.peek()] >= heights[i])
                 st.pop();
-            nse[i] = st.isEmpty() ? n : st.peek();
+            
+            int j = st.isEmpty() ? n : st.peek();
+            max = Math.max(max, heights[i] * (j - pse[i] - 1) );
             st.push(i);
         }
-
-        int ansMax = 0;
-
-        for(int i = 0; i < n; i++){
-            int j = nse[i] - pse[i] - 1;
-            ansMax = Math.max(ansMax, heights[i] * j );
-        }
-
-        return ansMax;
+        return max;
     }
 }
