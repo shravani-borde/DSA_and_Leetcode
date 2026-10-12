@@ -1,20 +1,33 @@
 class Solution {
     public int minInsertions(String s) {
-        int open = 0, ans = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '(') open++;
+        Stack<Character> st = new Stack<>();
+        int res = 0;
+        for(int i=0;i<s.length();i++) {
+            char ch = s.charAt(i);
+            if(ch == '(') {
+                st.push(ch);
+            }
             else {
-                // Step 1: make a "))"
-                if (i + 1 < s.length() && s.charAt(i + 1) == ')') i++;
-                else ans++;
-
-                // Step 2: find its '('
-                if (open > 0) open--;
-                else ans++;
+                if(st.isEmpty()) {
+                    if(i < s.length()-1 && s.charAt(i+1) == ')') {
+                        i++;
+                    }
+                    else {
+                        res++;
+                    }
+                    res++;
+                }
+                else {
+                    if(i < s.length()-1 && s.charAt(i+1) == ')') {
+                        i++;
+                    }
+                    else {
+                        res++;
+                    }
+                    st.pop();
+                }
             }
         }
-
-        return ans + open * 2;
+        return res+st.size()*2;
     }
 }
